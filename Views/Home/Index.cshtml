@@ -1,0 +1,155 @@
+﻿@using WebProgramming.Models
+
+@{
+    ViewData["Title"] = "Bài tập Web Programming";
+
+    // ==============================
+    // BÀI 1: DANH SÁCH SẢN PHẨM
+    // ==============================
+
+    var products = new List<Product>
+    {
+        new Product
+        {
+            Id = 1,
+            Name = "iPhone 15",
+            Price = 20000000
+        },
+
+        new Product
+        {
+            Id = 2,
+            Name = "Samsung Galaxy S24",
+            Price = 18000000
+        },
+
+        new Product
+        {
+            Id = 3,
+            Name = "Xiaomi 14",
+            Price = 12000000
+        }
+    };
+
+
+    // ==============================
+    // BÀI 2: KIỂM TRA CUỐI TUẦN
+    // ==============================
+
+    DateTime today = DateTime.Now;
+
+    string thuTrongTuan = "";
+
+    if (today.DayOfWeek == DayOfWeek.Monday)
+    {
+        thuTrongTuan = "Thứ Hai";
+    }
+    else if (today.DayOfWeek == DayOfWeek.Tuesday)
+    {
+        thuTrongTuan = "Thứ Ba";
+    }
+    else if (today.DayOfWeek == DayOfWeek.Wednesday)
+    {
+        thuTrongTuan = "Thứ Tư";
+    }
+    else if (today.DayOfWeek == DayOfWeek.Thursday)
+    {
+        thuTrongTuan = "Thứ Năm";
+    }
+    else if (today.DayOfWeek == DayOfWeek.Friday)
+    {
+        thuTrongTuan = "Thứ Sáu";
+    }
+    else if (today.DayOfWeek == DayOfWeek.Saturday)
+    {
+        thuTrongTuan = "Thứ Bảy";
+    }
+    else
+    {
+        thuTrongTuan = "Chủ Nhật";
+    }
+
+    bool laCuoiTuan =
+        today.DayOfWeek == DayOfWeek.Saturday ||
+        today.DayOfWeek == DayOfWeek.Sunday;
+}
+
+
+<div class="container">
+
+    <!-- BÀI 1 -->
+
+    <div class="card">
+
+        <h2>Bài 1: Hiển thị danh sách sản phẩm</h2>
+
+        <table class="product-table">
+
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Tên sản phẩm</th>
+                    <th>Giá</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                @foreach (var product in products)
+                {
+                    <tr>
+                        <td>@product.Id</td>
+                        <td>@product.Name</td>
+                        <td class="price">
+                            @product.Price.ToString("N0") VNĐ
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+
+    <!-- BÀI 2 -->
+
+    <div class="card">
+
+        <h2>Bài 2: Kiểm tra hôm nay có phải cuối tuần</h2>
+
+        <div class="date-info">
+
+            <p>
+                Ngày hôm nay:
+                <strong>
+                    @today.ToString("dd/MM/yyyy")
+                </strong>
+            </p>
+
+            <p>
+                Hôm nay là:
+                <strong>
+                    @thuTrongTuan
+                </strong>
+            </p>
+
+            @if (laCuoiTuan)
+            {
+                <p class="weekend">
+                    🎉 Hôm nay là cuối tuần!
+                </p>
+            }
+            else
+            {
+                <p class="weekday">
+                    📚 Hôm nay không phải cuối tuần.
+                </p>
+            }
+
+        </div>
+
+    </div>
+
+</div>
